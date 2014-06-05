@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<title>彩贝积分联合登录测试</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="zh-cn" />
+<META NAME="Generator" CONTENT="EditPlus">
+<META NAME="Author" CONTENT="Tenfyguo">
+<META NAME="Keywords" CONTENT="">
+<META NAME="Description" CONTENT="">
+</HEAD>
+<BODY>
+<H1>Linktech联合登录发包测试</H1>
+<p>使用方法：首先输入要测试的商户id，然后分别点击各个测试按钮跳转到商户站点进行验证商户逻辑是否正确即可</p>
+<br />
+
+<div>
+请输入要测试的商户ID: <input type="text" name="m_id" id="m_id" value="10069" /> <br /><br />
+请输入商户要回跳的URL: <input type="text" name="to_url" id="to_url" size="100" value="" /> <br />
+<br />
+<div>测试用例1：QQ号码是1002000201，<a href="/login_test/forward.php?uin=1002000201&" target="blank" onclick="javascript:return doJump(this);" id="run_test_case1">执行该用例</a></div><br />
+<div>测试用例2：QQ号码是1002000202，<a href="/login_test/forward.php?uin=1002000202&" target="blank" onclick="javascript:return doJump(this);" id="run_test_case2">执行该用例</a></div><br />
+<div>测试用例3：QQ号码是1002000203，<a href="/login_test/forward.php?uin=1002000203&" target="blank" onclick="javascript:return doJump(this);" id="run_test_case3">执行该用例</a></div><br />
+<div>测试用例4：QQ号码是1002000204，<a href="/login_test/forward.php?uin=1002000204&" target="blank" onclick="javascript:return doJump(this);" id="run_test_case4">执行该用例</a></div><br />
+</div>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+function $(id) {
+   return document.getElementById(id);
+};
+
+
+function doJump(element) {
+   //判断是否输入商户的id
+   var szParam = [];
+   var oMid = $('m_id');
+   var mid  = oMid.value;
+   if(mid.length < 1) {
+      alert('对不起，请输入商户的id');
+	  oMid.focus();
+	  return false;   
+   }
+   mid = parseInt(mid, 10);
+   if(isNaN(mid)){
+      alert('对不起，您输入商户的id必须是一个整数，且跟php的商品配置数组一致');
+	  oMid.focus();
+	  return false;  
+   }
+
+   szParam.push('m_id=' + mid);
+   //判断对应的商户跳转url是否输入
+   var oToUrl = $('to_url');
+   var toUrl  = oToUrl.value;
+   if(toUrl.length < 1) {
+      alert('对不起，请输入商户回跳的URL');
+	  oToUrl.focus();
+	  return false;   
+   }
+
+   szParam.push('to_url=' + encodeURIComponent(toUrl));
+   szParam.push('attach=100.1090.661556.132');
+   element.href = element.href + szParam.join('&');
+   return true;
+};
+//-->
+</SCRIPT>
+</BODY>
+</HTML>

@@ -1,0 +1,35 @@
+body{margin:0;padding:0;font-size:14px;}
+ul,dl,ol{margin:0;padding:0;}
+table{text-align: left;}
+img{border:0;}
+
+.menu_tab{font-size:12px;padding-top:20px;}
+.menu_tab a{text-decoration:none;}
+.menu_tab a:hover{text-decoration:underline;}
+
+.my_menu{width:800px;margin:0px auto;padding-top:80px;}
+.my_menu div.title{padding:5px 10px; font-size:16; font-weight:bold;color:#777; background-color:#EEE; border:1px solid #E0E0E0;border-top-left-radius:3px;border-top-right-radius:3px;}
+.my_menu div.title span{float:right;margin-right:5px;}
+.my_menu div.line{overflow:hidden;border:1px solid #C9D5E3;border-top:hidden;}
+
+.my_menu div.type{width:70px;margin:4px 0;padding:5px 18px;float:left;font-size:14;color:#555;font-weight:bold;border-right:1px solid #C9D5E3;}
+.my_menu div.menu{width:650px;float:left;padding-top:8px;}
+
+.my_menu div.menu ul{float:left;margin:2px 0;margin-left:12px;padding-bottom:7px;}
+.my_menu div.menu ul li{float:left;margin-left:2px;width:60px;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;}
+.my_menu div.menu ul li a{font-size:14;color:#0360AF;text-decoration:none;}
+.my_menu div.menu ul li a:HOVER{text-decoration:underline;}
+.my_menu div.menu ul span,img{float:left;}
+
+.over{background:#CCCCCC;}
+
+.overflow{overflow:hidden}
+
+.shadow {margin:0;width: 100%;height: 100%;_height: 800px;background: #000;filter: Alpha(opacity = 60);-moz-opacity: .5;opacity: 0.5;position: fixed;_position: absolute;z-index: 15;}
+.f_box{width: 100%;position: fixed;_position:absolute;z-index:20;top: 240px;display: block;}
+
+.btn{width:16px;height:16px;text-indent:-9999px;}
+.btn_add{background:url('../image/ico/ico_2.png') -338px -49px;background-repeat:no-repeat;cursor:pointer;}
+.btn_mng{background:url('../image/ico/ico_2.png') -520px -26px;background-repeat:no-repeat;cursor:pointer;}
+.btn_edt{background:url('../image/ico/ico_2.png') -573px -5px;background-repeat:no-repeat;cursor:pointer;}
+.btn_del{background:url('../image/ico/ico_3.png') -150px -1px;background-repeat:no-repeat;cursor:pointer;}

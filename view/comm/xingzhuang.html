@@ -1,0 +1,38 @@
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<script type="text/javascript">
+	function dothis(){
+		var type = document.form1.type.value;
+		var num  = parseInt(document.form1.num.value);
+		if(num > 0){
+			if(num > 30){
+				alert('你总是心太黑，心太黑!!!');return false;
+			}
+			var text = '';
+			if(type == 'S'){
+				for(var i = num; i > 0; i--){
+					for(var j = i; j < num; j++){
+						text += ' ';
+					}
+					for(var k = 0; k < i; k++){
+						text += '*';
+					}
+					for(var l = 1; l < i; l++){
+						text += '*';
+					}
+					text += "\n";
+				}
+			}else{
+				text += '勇敢的少年啊，快去创造奇迹!!!';
+			}
+			document.getElementById('view').value = text;
+		}
+	}
+</script>
+<form method="post" name="form1">
+打印类型:<select name="type"><option value="S">三角形</option><option value="L">菱形</option><option value="T">梯形</option></select><br/>
+打印数量:<input name="num" value=""/><br/>
+<input type="button" onclick="dothis()" value="Go!"/>
+</form>
+<textarea rows="20" cols="50" id="view"></textarea>

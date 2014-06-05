@@ -1,4 +1,0 @@
-MyGame
-======
-
-my test project
