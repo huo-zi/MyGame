@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link type="text/css" rel="stylesheet" href="" media="screen" />
+<style type="text/css" media="screen">
+.over{
+border:2px solid #000000;}
+.out{
+border:2px solid #CCCCCC;}
+div#wrapper {border: 2px solid #aaa; width: 280px; height: 280px; padding: 5px; position: relative; top: 100px; left: 100px; cursor: default;}
+div div {width: 42px; height: 42px; margin: 5px; border: 2px solid #aaa; float: left; text-align: center; background: #fff; overflow: hidden; cursor: default;}
+</style>
+<script type="text/javascript" src="/source/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript">
+$(function() {
+	for(var i = 1; i < 26; i++) {
+		$('<div class="out" onmouseover=this.className="over" onmouseout=this.className="out"><img src="/source/image/heishitong.jpg" border="0" alt="黑石瞳"></div>').appendTo('#wrapper');
+	}
+	$('#wrapper div').click(function() {
+		var thisWidth = $(this).width();
+		var thisHeight = $(this).height();
+		var thisTop = $(this).position().top;
+		var thisLeft = $(this).position().left;
+		$(this).clone().css({position: 'absolute', top: thisTop, left: thisLeft}).appendTo('#wrapper').animate({width: $('#wrapper').outerWidth(), height: $('#wrapper').outerHeight(), top: -7, left: -7}, function() {
+			
+		}).click(function() {
+			$(this).css({overflow: 'hidden'});
+			$(this).animate({width: thisWidth, height: thisHeight, top: thisTop, left: thisLeft}, function() {
+				$(this).remove();
+			});
+		});
+	});
+});
+</script>
+</head>
+<body>
+<div id="wrapper" style="position:relative"></div>
+</body>
+</html>
