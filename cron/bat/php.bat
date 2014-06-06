@@ -1,8 +1,9 @@
 @echo off
-echo #############################
-echo ##功能：执行本地PHP脚本BAT ##
-echo ##author：火子             ##
-echo #############################
+echo ┌──────────────┐
+echo │Function：执行本地PHP脚本BAT│
+echo │Author：火子                │
+echo │Date：2014-06-05            │ 
+echo └──────────────┘
 echo.
 
 set cron=E:\workspace_php\MyGame\cron
