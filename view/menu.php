@@ -139,9 +139,15 @@ if(false){
 		var objA = document.createElement('a');
 			objA.target = '_blank';
 			objA.href = document.getElementById('w_link').value;
-
 		document.body.appendChild(objA);
 		objA.click();
+	}
+	
+	function Jump(){
+		var lKeyCode = (navigator.appname=="Netscape") ? event.which : window.event.keyCode; //event.keyCode按的建的代码，13表示回车
+		if (lKeyCode == 13 ){
+			linkBlank();
+		}
 	}
 	</script>
 </head>
@@ -216,7 +222,7 @@ if(false){
 		</div>
 	</div>
 	<?php }?>
-	<div class="line"><input id="w_link" style="margin:3px 5px;width:92%;"/><button onclick="linkBlank()">猛戳</button></div>
+	<div class="line"><input id="w_link" onkeydown="Jump()" style="margin:3px 5px;width:92%;"/><button onclick="linkBlank()">猛戳</button></div>
 </div>
 </body>
 </html>

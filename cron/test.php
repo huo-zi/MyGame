@@ -1,3 +1,3 @@
 <?php 
-die('1');
+echo $_SERVER['argv'][1];die;
 ?>
