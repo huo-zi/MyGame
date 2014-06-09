@@ -13,11 +13,12 @@ if($_FILES){
 // 			echo "Type: " . $_FILES['file']['type'] . "<br />";
 // 			echo "Size: " . ($_FILES['file']['size'] / 1024) . " Kb<br />";
 // 			echo "Stored in: " . $_FILES['file']['tmp_name'];
-			if (!file_exists('source/upload/'.$_FILES['file']['name'])){
-				$res = move_uploaded_file($_FILES['file']['tmp_name'], 'source/upload/' . $_FILES['file']['name']);
-			}else{
-				$res = 1;
-			}
+// 			if (!file_exists('source/upload/'.$_FILES['file']['name'])){
+// 				$res = move_uploaded_file($_FILES['file']['tmp_name'], 'source/upload/' . $_FILES['file']['name']);
+// 			}else{
+// 				$res = 1;
+// 			}
+			$res = move_uploaded_file($_FILES['file']['tmp_name'], 'source/upload/' . $_FILES['file']['name']);
 			$file = 'source/upload/'.$_FILES['file']['name'];
 		}
 	}else{
@@ -70,11 +71,16 @@ if($_REQUEST['conf']&&$_REQUEST['name']){
 <style type="text/css">
         body{ margin:0; padding:0; list-style:none;}
         .centerDiv{width:800px; margin:0 auto;padding:5px 5px;border:1px solid;}
-        .shadow{width:100%;height:100%;position:fixed;margin:0;_height:800px;background:#000;filter:Alpha(opacity = 80);-moz-opacity:.9;opacity:0.9;_position:absolute;z-index:15;}
+        .shadow{width:100%;height:100%;position:fixed;margin:0;_height:800px;background:#FFF;filter:Alpha(opacity = 80);-moz-opacity:.9;opacity:1;_position:absolute;z-index:15;}
+        .close{position:absolute;top:20px;right:20px;width:24px;height:24px;background:url('/source/image/ico_close.png') 0 0;}
+        .close:hover{background:url('/source/image/ico_close.png') 0 -25px;}
+        #tools{position:absolute;bottom:20px;left:35%;border:2px solid #000;}
         .miao  {width:100%;height:100%;position:fixed;display:table;text-align:center;z-index:16;}
         .miao label{display:table-cell;vertical-align:middle;height:20px;padding:0 20%;}
-        .miao label span{border:1px dashed gray;margin-top:5px;margin-left:2px;padding:2px 5px;display:inline-block;color:#CCC;cursor:pointer;}
-        .miao label span:hover{border:1px dashed red;};
+        .miao label span{width:150px;border:2px solid;margin-top:5px;margin-left:2px;padding:2px 5px;display:inline-block;color:#000;cursor:pointer;overflow:hidden;word-break:keep-all;white-space:nowrap;}
+        .miao label span.yellow{border-color:#00F;background:green};
+        .miao label span.gray{border-color:gray;background:gray}
+        .miao label span.gray:hover{border-color:red;background:red};
     </style>
 </head>
 <script type="text/javascript">
@@ -84,9 +90,10 @@ if($_REQUEST['conf']&&$_REQUEST['name']){
 		$.getJSON('?first=true&type='+type+'&path='+path,function(data){
 			if(type == 1){
 				var label = document.createElement('label');
+					label.id="channel_label"
 				for(var i in data){
 					if(data[i]){
-						label.innerHTML+= ('<span onclick="this.style.display=\'none\';clickChannel(\''+data[i]+'\')">'+data[i]+'</span>');
+						label.innerHTML+= ('<span class="gray" onclick="this.style.display=\'none\';clickChannel(\''+data[i]+'\')">'+data[i]+'</span>');
 					}
 				}
 				document.getElementById('w_miao').appendChild(label);
@@ -118,7 +125,7 @@ if($_REQUEST['conf']&&$_REQUEST['name']){
 		var info = document.createElement('tr');
 			info.id = 'channel_'+id;	
 			info.innerHTML = '<td valign="top"><input name="channelType" value="type'+id+'" size="5">:</td>'
-			info.innerHTML+= '<td><textarea name="channelVal" id="channel'+id+'" rows="2" cols="80" readonly="readonly"></textarea></td>';
+			info.innerHTML+= '<td><textarea name="channelVal" id="channel'+id+'" rows="2" cols="80"></textarea></td>';
 			info.innerHTML+= '<td><input type="button" value="添加" onclick="selectChannel('+id+')"/></td>';
 		document.getElementById('channls').appendChild(info);
 		document.getElementById('addChannel').name = parseInt(id)+1;
@@ -137,6 +144,43 @@ if($_REQUEST['conf']&&$_REQUEST['name']){
 		document.getElementById('w_show').style.display = 'block';
 		selectId = id;
 		
+	}
+
+	function getKeywords(val){
+		var lKeyCode = (navigator.appname=="Netscape") ? event.which : window.event.keyCode; //event.keyCode按的建的代码，13表示回车
+		if (lKeyCode == 13){
+			selectAll('key');
+		}
+		
+		val = val.toLowerCase();
+		var channls = document.getElementById('channel_label').childNodes;
+		for(var i = 0; i<channls.length; i++){
+			if(channls[i].style.display != 'none'){
+				if(channls[i].innerHTML.toLowerCase().indexOf(val) != -1 && val != ''){
+					channls[i].className = 'yellow';
+				}else{
+					channls[i].className = 'gray';
+				}
+			}
+		}
+	}
+	
+	function selectAll(type){
+		document.getElementsByName('keywords')[0].value = '';
+		var channls = document.getElementById('channel_label').childNodes;
+		for(var i = 0; i<channls.length; i++){
+			if(channls[i].style.display != 'none'){
+				if(type == 'all'){
+					clickChannel(channls[i].innerHTML);
+					channls[i].style.display = 'none';
+				}else{
+					if(channls[i].className == 'yellow'){
+						clickChannel(channls[i].innerHTML);
+						channls[i].style.display = 'none';
+					}
+				}
+			}
+		}
 	}
 
 	function clickChannel(data){
@@ -158,7 +202,7 @@ if($_REQUEST['conf']&&$_REQUEST['name']){
 		for(var i = 0; i< types.length; i++){
 			data += types[i].value+':'+vals[i].value+",";
 		}
-		$.post('?save=true&name='+name+'&data='+data,function(data){
+		$.post('?save=true&name='+name,{'data':data},function(data){
 			if(data == 1){
 				alert('保存成功...');
 				document.getElementById('config').value = '/'+name+'.conf';
@@ -218,7 +262,14 @@ if($_REQUEST['conf']&&$_REQUEST['name']){
 </script>
 <body>
 <div id="w_show" class="shadow" style="display:none;"></div>
-<div id="w_miao" class="miao"   style="display:none;"></div>
+<div id="w_miao" class="miao"   style="display:none;">
+	<a class="close" id="w_close" href="javascript:void(0)" title="关闭" onclick="closeChannel()"></a>
+	<div id="tools">
+		<input type="button" value="全部添加" onclick="selectAll('all')"/>
+		<font color="#000">关键字 ：</font><input name="keywords" onkeyup="getKeywords(this.value)"/>
+		<input type="button" value="确定" onclick="selectAll('key')"/>
+	</div>
+</div>
 <div class="centerDiv">
 	<h2 align="center">XLS 统计</h2>
 	<?php if (!$file){?>
@@ -233,8 +284,8 @@ if($_REQUEST['conf']&&$_REQUEST['name']){
 		<input name="file" value="<?php echo $_FILES['file']['name'];?>" title="<?php echo $_FILES['file']['name'];?>" style="border:0;" readonly="readonly"/>
 		<input type="hidden" name="path" value="<?php echo $file?>"/>
 		<select name="type">
-			<option value="1">解析</option>
-			<option value="2" selected="selected">选择文件</option>
+			<option value="1" selected="selected">解析</option>
+			<option value="2">选择文件</option>
 		</select>
 		<input id="begin" type="button" value="开始" onclick="getInfo()"/>
 		<?php }else{?>
@@ -248,7 +299,7 @@ if($_REQUEST['conf']&&$_REQUEST['name']){
 	<table id="channls">
 		<tr>
 			<td valign="top"><input name="channelType" value="type1" size="5">:</td>
-			<td><textarea name="channelVal" id="channel1" rows="2" cols="80" readonly="readonly"></textarea></td>
+			<td><textarea name="channelVal" id="channel1" rows="2" cols="80"></textarea></td>
 			<td><input type="button" value="选择" onclick="selectChannel(1)"></td>
 		</tr>
 	</table>
