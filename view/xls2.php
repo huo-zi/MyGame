@@ -77,10 +77,10 @@ if($_REQUEST['conf']&&$_REQUEST['name']){
         #tools{position:absolute;bottom:20px;left:35%;border:2px solid #000;}
         .miao  {width:100%;height:100%;position:fixed;display:table;text-align:center;z-index:16;}
         .miao label{display:table-cell;vertical-align:middle;height:20px;padding:0 20%;}
-        .miao label span{width:150px;border:2px solid;margin-top:5px;margin-left:2px;padding:2px 5px;display:inline-block;color:#000;cursor:pointer;overflow:hidden;word-break:keep-all;white-space:nowrap;}
-        .miao label span.yellow{border-color:#00F;background:green};
-        .miao label span.gray{border-color:gray;background:gray}
-        .miao label span.gray:hover{border-color:red;background:red};
+        .miao label span{width:150px;border:1px solid #EEE;border-radius:3px;margin-top:4px;margin-left:8px;padding:2px 5px;display:inline-block;color:#000;cursor:pointer;overflow:hidden;word-break:keep-all;white-space:nowrap;}
+        .miao label span.yellow{border-color:#00F;background:yellow};
+        .miao label span.gray{border-color:#F0F0F0;background:gray}
+        .miao label span.gray:hover{border-color:blue;background:gray};
     </style>
 </head>
 <script type="text/javascript">

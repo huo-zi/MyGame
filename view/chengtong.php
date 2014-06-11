@@ -25,8 +25,8 @@ if($_REQUEST['detail']){
 	$imgs = 'http://www.400gb.com'.substr($info, stripos($info,'document.write("<img id=\'vfcode\' src=\'')+38, 32+strlen($_REQUEST['file'])).randomFloat(0,1);
 	$hash = substr($info, stripos($info,'<input type="hidden" id="hash_key" name="hash_key" value="'), 94);
 	showAuthcode($imgs);
-// 	echo '<form name="user_form" action="http://www.400gb.com/guest_loginV2.php" method="post">'."\n";
-	echo '<form name="user_form" action="?submit=true" method="post">'."\n";
+	echo '<form name="user_form" action="http://www.400gb.com/guest_loginV2.php" method="post">'."\n";
+// 	echo '<form name="user_form" action="?submit=true" method="post">'."\n";
 	echo '<script type="text/javascript">'."\n";
 	echo "document.write(\"<img id='vfcode' src='{$imgs}'/>\");\n";
 	echo '</script>'."\n";
