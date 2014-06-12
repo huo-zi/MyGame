@@ -1,3 +1,9 @@
+//////////////////
+//拼图插件V3.0
+//编码:UTF-8
+//火子
+//2014-05-20
+/////////////
 function Puzzle(divId, width, height, src, className){
 	this.divId = divId;
 	this.width = width;
@@ -21,12 +27,12 @@ Puzzle.prototype = {
 			puDiv.className = self.className;
 			puDiv.style.width  = self.width+'px';
 			puDiv.style.height = self.height+'px';
+			puDiv.style.display = 'inline-block';
 			
 		var rows, cols, size, w, h;
 		size = self.switchSize();
 		rows = parseInt(self.width/size) + 1;
 		cols = parseInt(self.height/size) + 1;
-		
 		w = parseInt((self.width -rows*2)/rows);
 		h = parseInt((self.height-cols*2)/cols);
 
@@ -42,13 +48,10 @@ Puzzle.prototype = {
 			divPic.style.height = h+'px';
 			divPic.style.margin = '1px';
 			
-			if(i == rows*cols-1){
-				divPic.style.background = null;
-			}else{
-				divPic.style.backgroundImage = 'url('+self.src+')';
-				divPic.style.backgroundSize = self.width+'px '+self.height+'px';
-				divPic.style.backgroundPosition = x+'px '+y+'px';
-			}
+			divPic.style.backgroundPosition = x+'px '+y+'px';
+			divPic.style.backgroundSize = self.width+'px '+self.height+'px';
+			divPic.style.backgroundImage = (i == rows*cols-1) ? '' : 'url('+self.src+')';
+			
 			divPic.style.float = 'left';
 			divPic.style.cssFloat = 'left';
 			divPic.style.overflow = 'hidden'; 
@@ -67,22 +70,28 @@ Puzzle.prototype = {
 				}else if(parseInt(index/cols) == parseInt(self.emptyIndex/rows) || index%rows == self.emptyIndex%rows){
 					var m = (index%rows == self.emptyIndex%rows) ? rows : 1;
 					if(index > self.emptyIndex){
-						for(var i = self.emptyIndex; i < index ; i=i+m){
-							var domBg = this.parentNode.childNodes[i].style.background;
-							var domId = this.parentNode.childNodes[i].id;
-							this.parentNode.childNodes[i].style.background = this.parentNode.childNodes[i+m].style.background;
-							this.parentNode.childNodes[i].id = this.parentNode.childNodes[i+m].id;
-							this.parentNode.childNodes[i+m].style.background = domBg;
-							this.parentNode.childNodes[i+m].id = domId;
+						for(var j = self.emptyIndex; j < index ; j=j+m){
+							var domBg = this.parentNode.childNodes[j].style.backgroundImage;
+							var domBp = this.parentNode.childNodes[j].style.backgroundPosition;
+							var domId = this.parentNode.childNodes[j].id;
+							this.parentNode.childNodes[j].style.backgroundImage = this.parentNode.childNodes[j+m].style.backgroundImage;
+							this.parentNode.childNodes[j].style.backgroundPosition = this.parentNode.childNodes[j+m].style.backgroundPosition;
+							this.parentNode.childNodes[j].id = this.parentNode.childNodes[j+m].id;
+							this.parentNode.childNodes[j+m].style.backgroundImage = domBg;
+							this.parentNode.childNodes[j+m].style.backgroundPosition = domBp;
+							this.parentNode.childNodes[j+m].id = domId;
 						}
 					}else{
-						for(var i = self.emptyIndex; i > index ; i=i-m){
-							var domBg = this.parentNode.childNodes[i].style.background;
-							var domId = this.parentNode.childNodes[i].id;
-							this.parentNode.childNodes[i].style.background = this.parentNode.childNodes[i-m].style.background;
-							this.parentNode.childNodes[i].id = this.parentNode.childNodes[i-m].id;
-							this.parentNode.childNodes[i-m].style.background = domBg;
-							this.parentNode.childNodes[i-m].id = domId;
+						for(var j = self.emptyIndex; j > index ; j=j-m){
+							var domBg = this.parentNode.childNodes[j].style.backgroundImage;
+							var domBp = this.parentNode.childNodes[j].style.backgroundPosition;
+							var domId = this.parentNode.childNodes[j].id;
+							this.parentNode.childNodes[j].style.backgroundImage = this.parentNode.childNodes[j-m].style.backgroundImage;
+							this.parentNode.childNodes[j].style.backgroundPosition = this.parentNode.childNodes[j-m].style.backgroundPosition;
+							this.parentNode.childNodes[j].id = this.parentNode.childNodes[j-m].id;
+							this.parentNode.childNodes[j-m].style.backgroundImage = domBg;
+							this.parentNode.childNodes[j-m].style.backgroundPosition = domBp;
+							this.parentNode.childNodes[j-m].id = domId;
 						}
 					}
 					self.emptyIndex = index;
@@ -97,7 +106,7 @@ Puzzle.prototype = {
 		
 		for(var i = 0; i < rows*cols; i++){
 			var index = parseInt(Math.random() * self.initialDiv.length);
-			if(!self.initialDiv[index].style.background){
+			if(!self.initialDiv[index].style.backgroundImage){
 				self.emptyIndex = i;
 			}
 			puDiv.appendChild(self.initialDiv[index]);
@@ -131,23 +140,19 @@ Puzzle.prototype = {
 		if(size <= 100){
 			return 40;
 		}else if(size > 100 && size <= 200){
-			return 50;
-		}else if(size > 200 && size <= 300){
 			return 80;
-		}else if(size > 300 && size <= 400){
+		}else if(size > 200 && size <= 300){
 			return 100;
+		}else if(size > 300 && size <= 400){
+			return 150;
 		}else{
-			return parseInt(size/4);
+			return parseInt(size/3);
 		}
 	}
 };
 
 onload = function(){
-	var puzzle_style =  document.createElement('style');
-	puzzle_style.type = 'text/css';
-	puzzle_style.innerHTML = '.puzzle_over{background:#FF0000;filter:alpha(opacity=50);-moz-opacity:0.5;opacity: 0.3;}.puzzle_overline{background:#FFF;filter:alpha(opacity=50);-moz-opacity:0.5;opacity: 0.5;}'; 
-	document.head.appendChild(puzzle_style);
-
+	
 	var Domimgs = document.getElementsByTagName('img');
 	for(var index = 0; index < Domimgs.length; index++){
 		if(Domimgs[index].width > 100 && Domimgs[index].height > 80 && Domimgs[index].className.indexOf('puzzle') != -1){

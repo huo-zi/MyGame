@@ -6,7 +6,7 @@ echo ©¦Date£º2014-06-05            ©¦
 echo ©¸©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¼
 echo.
 
-set cron=E:\workspace_php\MyGame\cron
+set cron=E:\workspace_php
 set php=D:\server\php-5.3.3
 
 :input
