@@ -103,7 +103,7 @@ function openNode($i,$j){//set nodes to open,if it is can open
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>扫雷游戏 www.521php.com</title>
+<title>扫雷游戏</title>
 </head>
 <body>
 <form action="" method="post">
@@ -154,7 +154,7 @@ function clickNum(value){//click a node
     document.forms[0].submit();
 }
 <?php if($checkflag == 0 && $click_count>0)echo 'setTimeout("timerun()",1000);';//time running ?>
-<?php if($checkflag == 1)echo 'alert("恭喜，雷全部清掉了!www.521php.com");';?>
+<?php if($checkflag == 1)echo 'alert("恭喜，雷全部清掉了!");';?>
 <?php if($checkflag == 2)echo 'alert("太挫了，又被雷炸死了");';?>
 function timerun(){//time running
     var timelist = document.forms[0].timeshow.value.split(":");

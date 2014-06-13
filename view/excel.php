@@ -1,10 +1,14 @@
 <style>
+body{font-size:12px;}
 .table_data{
 	width:90px;
 	height:20px;
+	line-height:20px;
 	border-style:ridge;
-	border-width:1;
+	border-collapse:collapse;
+	border:1px solid #000;
 	border-color:RGB(218,220,221);
+	-moz-user-select: none;
 }
 .td_header{
 	height:20px;
@@ -16,17 +20,21 @@
 .tab_base{	
 	background:#C5D0DD;
 	border-style:ridge;
-	border-width:1;
 	cursor:pointer;
-	width:90;height:20;
+	width:90px;
+	height:20px;
 }
 .table_sub_heading{
 	background:RGB(223,227,232);
 	font-weight:bold;
 	border-style:ridge;
-	border-width:1;
+	border-collapse:collapse;
+	border:1px solid #000;
 	text-align:center;
 	border-color:RGB(177,181,186);
+}
+.table_line_select{
+	background:RGB(255,215,93);
 }
 .table_body{
 	background:#F0F0F0;
@@ -34,8 +42,10 @@
 	font-size:12;
 	font-family:sans-serif;
 	border-style:ridge;
-	border-width:1;
+	border-collapse:collapse;
+	border:1px solid #000;
 	border-spacing: 0px;
+	-moz-user-select: none;
 	border-collapse: collapse;
 }
 .tab_loaded
@@ -49,6 +59,11 @@
 	width:90;height:20;
 }
 </style>
+<script type="text/javascript">
+onselectstart = function(){
+	return false;
+}
+</script>
 <?
 $allow_url_override = 1; // Set to 0 to not allow changed VIA POST or GET
 if(!$allow_url_override || !isset($file_to_include)){
@@ -60,7 +75,7 @@ if(!$allow_url_override || !isset($max_rows)){
 }
 
 if(!$allow_url_override || !isset($max_cols)){
-	$max_cols = 5; //USE 0 for no max
+	$max_cols = 9; //USE 0 for no max
 }
 
 if(!$allow_url_override || !isset($debug)){
@@ -71,7 +86,7 @@ if(!$allow_url_override || !isset($force_nobr)){
 	$force_nobr = 1;  //Force the info in cells not to wrap unless stated explicitly (newline)
 }
 
-require_once '../lib/class/comm/Excel/reader.php';
+require_once 'class/comm/Excel/reader.php';
 $data = new Spreadsheet_Excel_Reader();
 $data->setOutputEncoding('CPa25a');
 $data->read($file_to_include);
@@ -161,8 +176,7 @@ for($sheet=0;$sheet<count($data->sheets);$sheet++){
 	$table_output[$sheet] = str_replace("\n","",$table_output[$sheet]);
 	$table_output[$sheet] = str_replace("\r","",$table_output[$sheet]);
 	$table_output[$sheet] = str_replace("\t"," ",$table_output[$sheet]);
-	if($debug)
-	{
+	if($debug){
 		$debug_output = print_r($data->sheets[$sheet],true);
 		$debug_output = str_replace("\n","\\n",$debug_output);
 		$debug_output = str_replace("\r","\\r",$debug_output);

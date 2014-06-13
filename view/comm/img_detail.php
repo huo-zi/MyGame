@@ -94,14 +94,11 @@
 <div id="w_show" class="shadow" style="display:none;"></div>
 <div id="w_miao" class="miao"   style="display:none;">
     <span><img id="pic" src="/source/image/GIF/gif/2609741_980x1200_0.jpg" /></span>
-	<a class="close" id="w_close" href="javascript:void(0)" title="╧ь╠у"   onclick="closePic()"></a>
-	<a class="prev"  id="w_prev"  href="javascript:void(0)" title="иор╩уе" onclick="changePic(-1)"></a>
-	<a class="next"  id="w_next"  href="javascript:void(0)" title="обр╩уе" onclick="changePic(1)"></a>
+	<a class="close" id="w_close" href="javascript:void(0)" title="О©╫ь╠О©╫"   onclick="closePic()"></a>
+	<a class="prev"  id="w_prev"  href="javascript:void(0)" title="О©╫О©╫р╩О©╫О©╫" onclick="changePic(-1)"></a>
+	<a class="next"  id="w_next"  href="javascript:void(0)" title="О©╫О©╫р╩О©╫О©╫" onclick="changePic(1)"></a>
 </div>
 <?php 
-define('_LIB_ROOT' , dirname(dirname(dirname(__FILE__))) . '/lib/');
-define('_PATH_SEPARATOR', preg_match("/WIN/i",PHP_OS) ? ";" : ":");
-ini_set("include_path", "."._PATH_SEPARATOR._LIB_ROOT);
 $fild = 'GIF/gif';
 require_once 'class/comm/class.file.php';
 $files = File::pathFileList('E:/PHPworkspace/MyGame/view/source/image/'.$fild);

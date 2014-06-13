@@ -1,7 +1,4 @@
 <?php
-define('_LIB_ROOT' , dirname(dirname(dirname(__FILE__))) . '/lib/');
-define('_PATH_SEPARATOR', preg_match("/WIN/i",PHP_OS) ? ";" : ":");
-ini_set("include_path", "."._PATH_SEPARATOR._LIB_ROOT);
 require_once 'class/comm/class.file.php';
 if($_POST['file']){
 	$file  = $_POST['file'];

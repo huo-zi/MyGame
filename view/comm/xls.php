@@ -21,7 +21,7 @@ if($_FILES){
 }
 
 if($_GET['line'] && $_GET['file']){
-	require_once '../lib/class/comm/class.file.php';
+	require_once 'class/comm/class.file.php';
 	echo File::getFileLineCount($_GET['file']);exit;
 }
 

@@ -1,7 +1,7 @@
 <?php
 // ²âÊÔÎÄµµ
 
-require_once '../lib/class/comm/Excel/reader.php';
+require_once 'class/comm/Excel/reader.php';
 
 // ExcelÎÄ¼þ($filename, $encoding);
 $data = new Spreadsheet_Excel_Reader();

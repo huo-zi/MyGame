@@ -1,6 +1,6 @@
 <body bgcolor="gray">
 <?php 
-require_once '../lib/class/comm/class.file.php';
+require_once 'class/comm/class.file.php';
 $files = File::pathFileList('E:/PHPworkspace/MyGame/view/source/image/GIF');
 
 function digui($files){

@@ -1,6 +1,6 @@
 <?php 
-require_once '../lib/class/comm/class.file.php';
-require_once '../lib/class/user/class.user.php';
+require_once 'class/comm/class.file.php';
+require_once 'class/user/class.user.php';
 
 // $url = ('https://www.google.com.hk/complete/search?client=serp&hl=zh-CN&gs_rn=36&gs_ri=serp&pq=test&cp=1&gs_id=2ia&q=t&xhr=t');
 // $ch = curl_init();
@@ -222,7 +222,7 @@ if(false){
 		</div>
 	</div>
 	<?php }?>
-	<div class="line"><input id="w_link" onkeydown="Jump()" style="margin:3px 5px;width:92%;"/><button onclick="linkBlank()">猛戳</button></div>
+	<div class="line"><input id="w_link" onkeydown="Jump()" style="margin:3px 5px;width:728px;"/><button onclick="linkBlank()" style="float:right;margin-right: 5px;">猛戳</button></div>
 </div>
 </body>
 </html>
